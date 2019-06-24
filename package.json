@@ -1,0 +1,30 @@
+{
+  "name": "Discord-Modmail-Bot",
+  "version": "0.1.0",
+  "description": "Simple Discord Modmail bot with updated tutorial using Discord.js.",
+  "main": "index.js",
+  "author": "Ishmaam Khan <ishmaamk@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "better-sqlite-pool": "^0.2.2",
+    "discord.js": "^11.5.1",
+    "enmap": "^4.8.6",
+    "moment": "^2.24.0",
+    "node-fetch": "^2.6.0",
+    "eslint": "^5.16.0"
+  },
+  "devDependencies": {
+    "eslint": "^5.14.0",
+    "eslint-config-aqua": "^4.4.1"
+  },
+  "optionalDependencies": {
+    "@discordjs/uws": "^11.149.1",
+    "erlpack": "discordapp/erlpack"
+  },
+  "eslintConfig": {
+    "extends": "aqua/node"
+  }
+}
