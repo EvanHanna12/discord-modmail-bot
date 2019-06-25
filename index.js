@@ -115,7 +115,7 @@ client.on('message', async message => { // For normal commands.
 				'`!reply (!r)` - send an official reply to the user in this channel thread.',
 				'`!anonreply (!ar)` - send an anonymous reply to the user in this channel thread.',
 				'`!close (!c)` - close the thread in the current channel.',
-				'`!blacklist (!bl)` - blacklists or unblacklists (toggle) the user who owns the current thread from using the bot. Or it can be an ID of the user you want to blacklist.',
+				'`!blacklist (!bl)` - blacklists or unblacklists (toggle) the user who owns the current thread from using the bot. **Note: You will need to keep the channel after blacklisting otherwise you cannot unblacklist them back!**',
 				'`!logs` - shows logs for the current user who owns the thread.',
 			])
 			.setColor(color)
@@ -174,12 +174,11 @@ client.on('message', async message => {
 		newThread(client, message);
 		return;
 	}
-
-        const r1 = new RegExp(`${prefix}\s*(bl|blacklist)`);
+	
+	
 	let parent = guild.channels.get(config.modmail);
 	parent = parent ? parent : false;
 	if (parent && message.channel.parent.id !== parent.id) return;
-	if (r1.test(message.content)) return mod(client, message, args, command);
 	if ((/modmail-/).test(message.channel.name)) return mod(client, message, args, command);
 
 });
