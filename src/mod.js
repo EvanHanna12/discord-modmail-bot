@@ -135,11 +135,8 @@ module.exports = async (client, message, args, command) => {
 
 			db.defer.then(() => {
 				
-				const r = /\d{17,18}/g;
-			        let dbuser = db.get(uid);
+			        const dbuser = db.get(uid);
 				message.delete();
-				
-				if (args[0] && r.test(args[0])) dbuser = db.get(args[0]);
 				
 				const reason = args.join(' ');
 				let un, unb, cl, cur_bl, origReason;
