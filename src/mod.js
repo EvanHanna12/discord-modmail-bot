@@ -170,7 +170,7 @@ module.exports = async (client, message, args, command) => {
 
 				const embed = new RichEmbed()
 					.setTitle(`${unb}lacklisted ${user.tag}!`)
-					.setDescription(`Successfully ${un}blacklisted ${user.tag} ${cur_bl ? `for \`${reason}\`` : `\n(blacklisted by \`${dbuser.bl.mod}\` for \`${dbuser.bl.reason}\`)`}`) // reason? why map?
+					.setDescription(`Successfully ${un}blacklisted ${user.tag} ${cur_bl ? `for \`${reason}\`` : `\n(blacklisted by \`${dbuser.bl.mod}\` for \`${dbuser.bl.reason}\`)`}`)
 					.setColor(cl)
 					.setFooter(user.tag, user.displayAvatarURL);
 				message.channel.send(embed);
