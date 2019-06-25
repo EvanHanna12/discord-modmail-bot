@@ -150,7 +150,7 @@ module.exports = async (client, message, args, command) => {
 						reason: null,
 						mod: null,
 					});
-					un = 'un', unb = 'Unb', c = 0x00FF00, cur_bl = false;
+					un = 'un', unb = 'Unb', cl = 0x00FF00, cur_bl = false;
 
 				}
 				else {
@@ -164,7 +164,7 @@ module.exports = async (client, message, args, command) => {
 						mod: `${tag} (${uid})`,
 					});
 
-					un = '', unb = 'B', c = 0xFF0000, cur_bl = true;
+					un = '', unb = 'B', cl = 0xFF0000, cur_bl = true;
 
 				}
 
