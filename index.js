@@ -116,7 +116,7 @@ client.on('message', async message => { // For normal commands.
 				'`!anonreply (!ar)` - send an anonymous reply to the user in this channel thread.',
 				'`!close (!c)` - close the thread in the current channel.',
 				'`!blacklist (!bl)` - blacklists or unblacklists (toggle) the user who owns the current thread from using the bot.',
-				'`!logs` - shows logs for the current user who owns the thread',,
+				'`!logs` - shows logs for the current user who owns the thread.',
 			])
 			.setColor(color)
 			.setFooter(tag, avatar);
