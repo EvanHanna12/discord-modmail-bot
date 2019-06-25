@@ -141,7 +141,7 @@ module.exports = async (client, message, args, command) => {
 				const reason = args.join(' ');
 				let un, unb, cl, cur_bl, origReason;
 
-				if (!message.member.roles.has(support.id)) return err('Hmm, seems like you don\'t have the support role, so you don\'t have have access to use this command!').then(m => m.delete(5000));
+				if (!message.member.roles.has(support.id)) return err('Hmm, seems like you don\'t have the preferred role for this, so you don\'t have have access to use this command!').then(m => m.delete(5000));
 
 				if (dbuser.bl.active) {
 
