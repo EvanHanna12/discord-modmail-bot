@@ -176,10 +176,11 @@ client.on('message', async message => {
 		return;
 	}
 
-
+        const r1 = new RegExp(`${prefix}\s*(bl|blacklist)`);
 	let parent = guild.channels.get(config.modmail);
 	parent = parent ? parent : false;
 	if (parent && message.channel.parent.id !== parent.id) return;
+	if (r1.test(message.content)) return mod(client, message, args, command);
 	if ((/modmail-/).test(message.channel.name)) return mod(client, message, args, command);
 
 });
