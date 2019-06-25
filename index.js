@@ -115,7 +115,7 @@ client.on('message', async message => { // For normal commands.
 				'`!reply (!r)` - send an official reply to the user in this channel thread.',
 				'`!anonreply (!ar)` - send an anonymous reply to the user in this channel thread.',
 				'`!close (!c)` - close the thread in the current channel.',
-				'`!blacklist (!bl)` - blacklists or unblacklists (toggle) the user who owns the current thread from using the bot.',
+				'`!blacklist (!bl)` - blacklists or unblacklists (toggle) the user who owns the current thread from using the bot. Or it can be an ID of the user you want to blacklist.',
 				'`!logs` - shows logs for the current user who owns the thread.',
 			])
 			.setColor(color)
@@ -128,7 +128,6 @@ client.on('message', async message => { // For normal commands.
 
 
 client.on('message', async message => {
-
 
 	const prefix = '!';
 
