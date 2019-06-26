@@ -24,13 +24,23 @@ module.exports = async (client, message, args, command) => {
 		const guild = client.guilds.get(config.guild);
 		const support = guild.roles.get(config.support);
 		const log = guild.channels.get(config.log);
-		const thread = message.channel;
+		const re = /^\d{17, 18}/g;
+		let thread;
+		if ((/modmail-/).test(message.channel.name)) thread = message.channel;
 
-		let user = client.users.get(getID.exec(thread.topic)[1]);
+		let user;
+		if (thread) user = await client.fetchUser(getID.exec(thread.topic)[1]);
 		user = user ? user : false;
-		if (!user) return message.channel.send('Invalid user.');
+		if (!user && thread) return err('Invalid user. Please try closing the channel manually.');
 		let k;
 		if (user) k = guild.id + '_' + user.id;
+
+		else if (re.test(message.content)) {
+			let inv = false;
+			user = await client.fetchUser(args[0]).catch(() => { inv = true; });
+			if (inv) return err('Invalid user.');
+			k = guild.id + '_' + user.id;
+		}
 
 		logs.ensure(k, { messages: [], logs: [], reason: '' });
 
@@ -133,19 +143,29 @@ module.exports = async (client, message, args, command) => {
 
 		if (['bl', 'blacklist'].includes(command)) {
 
+			message.delete();
+
 			db.defer.then(() => {
-				
-			        const dbuser = db.get(uid);
-				message.delete();
-				
-				const reason = args.join(' ');
+
+				let dbuser;
+				if (re.test(message.content)) dbuser = db.get(args[0]);
+				else dbuser = db.get(uid);
+
+				let reason;
+
+				if (re.test(message.content)) {
+					args.shift();
+					reason = args.join(' ');
+				}
+				else reason = args.join(' ');
+
 				let un, unb, cl, cur_bl, origReason;
 
-				if (!message.member.roles.has(support.id)) return err('Hmm, seems like you don\'t have the preferred role for this, so you don\'t have have access to use this command!').then(m => m.delete(5000));
+				if (!message.member.roles.has(support.id)) return err('Hmm, seems like you don\'t have the support role, so you don\'t have have access to use this command!').then(m => m.delete(5000));
 
 				if (dbuser.bl.active) {
 
-					db.setProp(user.id, 'bl', {
+				 	db.setProp(user.id, 'bl', {
 						active: false,
 						reason: null,
 						mod: null,
@@ -188,7 +208,6 @@ module.exports = async (client, message, args, command) => {
 			else message.channel.send(`Logs:\n${theLog.join('\n')}`);
 
 		}
-
 
 
 		function err(text) {
