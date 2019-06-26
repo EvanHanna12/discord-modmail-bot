@@ -1,3 +1,16 @@
+const http = require('http');
+const express = require('express');
+const app = express();
+app.get("/", (request, response) => {
+  console.log(Date.now() + " Ping Received");
+  response.sendStatus(200);
+});
+app.listen(process.env.PORT);
+setInterval(() => {
+  http.get(`http://${process.env.PROJECT_DOMAIN}.glitch.me/`);
+}, 280000);
+
+
 const Discord = require('discord.js');
 const { RichEmbed, Client } = Discord;
 const client = new Client();
@@ -115,7 +128,7 @@ client.on('message', async message => { // For normal commands.
 				'`!reply (!r)` - send an official reply to the user in this channel thread.',
 				'`!anonreply (!ar)` - send an anonymous reply to the user in this channel thread.',
 				'`!close (!c)` - close the thread in the current channel.',
-				'`!blacklist (!bl)` - blacklists or unblacklists (toggle) the user who owns the current thread from using the bot. **Note: You will need to keep the channel after blacklisting otherwise you cannot unblacklist them back!**',
+				'`!blacklist (!bl)` - blacklists or unblacklists (toggle) the user who owns the current thread from using the bot. Or it can be an ID of that user you want to blacklist/unblacklist.',
 				'`!logs` - shows logs for the current user who owns the thread.',
 			])
 			.setColor(color)
@@ -128,7 +141,7 @@ client.on('message', async message => { // For normal commands.
 
 
 client.on('message', async message => {
-
+  
 	const prefix = '!';
 
 	if (message.author.bot) return;
@@ -160,7 +173,7 @@ client.on('message', async message => {
 
 		user.send(`**(${rol_e}) ${message.author.tag}**: ${message.content}`)
 			.catch(error => {
-				err('An error occured while sending the message!');
+				message.channel.send('An error occured while sending the message!');
 			});
 
 		message.channel.send(`**(${rol_e}) ${message.author.tag}**: ${message.content}`);
@@ -174,11 +187,9 @@ client.on('message', async message => {
 		newThread(client, message);
 		return;
 	}
-	
-	
-	let parent = guild.channels.get(config.modmail);
-	parent = parent ? parent : false;
-	if (parent && message.channel.parent.id !== parent.id) return;
+
+  const r1 = new RegExp(`${prefix}\s*(bl|blacklist)`);
+  if (r1.test(message.content)) return mod(client, message, args, command);
 	if ((/modmail-/).test(message.channel.name)) return mod(client, message, args, command);
 
 });
