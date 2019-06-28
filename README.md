@@ -10,7 +10,7 @@ npm install
 
 ## Usage
 
-Read the config.js. There are instructions. You can edit the code as your neeed.
+Read the config.js. There are instructions. You can edit the code as your need.
 
 ## Documentation 
 
