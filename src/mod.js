@@ -27,7 +27,7 @@ module.exports = async (client, message, args, command) => {
 		const re = /\d{17,18}/g;
 		
 
-    let thread;
+                let thread;
 		if ((/modmail-/).test(message.channel.name)) thread = message.channel;
 
 		let user;
@@ -37,11 +37,11 @@ module.exports = async (client, message, args, command) => {
 		let k;
 		if (user) k = guild.id + '_' + user.id;
 
-    if (re.test(message.content)) {
+                if (re.test(message.content)) {
 			let inv = false;
 			user = await client.fetchUser(args[0]).catch(() => { inv = true; });
 			if (inv) return err('Invalid user.');
-      console.log(user.id);
+
 			k = guild.id + '_' + user.id;
 		}
 
