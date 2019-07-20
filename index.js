@@ -1,14 +1,3 @@
-const http = require('http');
-const express = require('express');
-const app = express();
-app.get("/", (request, response) => {
-  console.log(Date.now() + " Ping Received");
-  response.sendStatus(200);
-});
-app.listen(process.env.PORT);
-setInterval(() => {
-  http.get(`http://${process.env.PROJECT_DOMAIN}.glitch.me/`);
-}, 280000);
 
 
 const Discord = require('discord.js');
@@ -154,7 +143,7 @@ client.on('message', async message => {
 	const newThread = require('./src/newthread.js'),
 		mod = require('./src/mod.js');
 	const args = message.content.slice(prefix.length).trim().split(/\s+/g);
-	  const command = args.shift().toLowerCase();
+	const command = args.shift().toLowerCase();
 
 	if (autoreply && (/modmail-/).test(message.channel.name) && message.member.roles.has(role.id)) {
 		const r = new RegExp(`${prefix}\s*(close|c|blacklist|bl|logs)`);
@@ -188,8 +177,8 @@ client.on('message', async message => {
 		return;
 	}
 
-  const r1 = new RegExp(`${prefix}\s*(bl|blacklist)`);
-  if (r1.test(message.content)) return mod(client, message, args, command);
+        const r1 = new RegExp(`${prefix}\s*(bl|blacklist)`);
+        if (r1.test(message.content)) return mod(client, message, args, command);
 	if ((/modmail-/).test(message.channel.name)) return mod(client, message, args, command);
 
 });
