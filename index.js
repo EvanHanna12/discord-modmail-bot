@@ -1,5 +1,3 @@
-
-
 const Discord = require('discord.js');
 const { RichEmbed, Client } = Discord;
 const client = new Client();
